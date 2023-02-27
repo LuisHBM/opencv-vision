@@ -1,11 +1,12 @@
 import cv2
-import numpy as np
 
-#Inicializando objeto que será a webcam
+#Inicializando objeto de captura
 cap = cv2.VideoCapture(0)
 
 #Definindo detector
 face_cascade = cv2.CascadeClassifier("cascades/haarcascade_frontalface_default.xml")
+#Fonte
+font = cv2.FONT_HERSHEY_COMPLEX
 
 while True:
     # Capturando frame da webcam
@@ -20,6 +21,7 @@ while True:
     # Desenhando um retângulo em volta dos objetos detectados
     for (x, y, w, h) in faces:
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
+        cv2.putText(frame, str(x) +", "+ str(y), (x, y-10), font, 0.5, (0, 0, 255))
 
     # Exibindo o frame processado
     cv2.imshow("Object Detection", frame)
